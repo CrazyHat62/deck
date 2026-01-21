@@ -141,6 +141,8 @@ func Show(cs []Card) {
 	}
 }
 
+// OLD CODE TO BE REMOVED
+
 //func (c Card) CardValue() int {
 //	return c.value
 //}
