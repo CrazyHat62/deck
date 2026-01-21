@@ -1,3 +1,12 @@
+// Package deck simply provides a 52 card deck shuffled with microsoft 32000 numbers (for freecell)
+//
+//	it also provides an :
+//		additional 1 pass shuffle
+//		ability to remove top or bottom card
+//		ability to add top or bottom card
+//		ability to split the deck in two
+//
+// decks are passed by slices so other things like a hand can be achieved
 package deck
 
 import (
@@ -24,20 +33,24 @@ func NoCard() Card {
 	return Card{Suit: "", Rank: "", index: -1}
 }
 
+// credit to https://rosettacode.org/wiki/Deal_cards_for_FreeCell#Go
 const sSuits = "CDHS"
 const sNums = "A23456789TJQK"
 
 const rMax32 = math.MaxInt32
 
+// credit to https://rosettacode.org/wiki/Deal_cards_for_FreeCell#Go
 var seed = 1
 
 // Used specifically for the Microsoft Deck numbers (first 32000)
+// credit to https://rosettacode.org/wiki/Deal_cards_for_FreeCell#Go
 func rnd() int {
 	seed = (seed*214013 + 2531011) & rMax32
 	return seed >> 16
 }
 
 // Create a deck and shuffle
+// credit to https://rosettacode.org/wiki/Deal_cards_for_FreeCell#Go
 func Deal(s int) []Card {
 	seed = s
 	t := make([]Card, 52)
