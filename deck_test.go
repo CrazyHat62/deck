@@ -24,7 +24,7 @@ func TestDeal(t *testing.T) {
 		}
 
 	}
-	print(len(cards))
+	print(len(got))
 
 }
 
