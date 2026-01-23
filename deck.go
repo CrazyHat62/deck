@@ -14,8 +14,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand/v2"
-
-	rl "github.com/gen2brain/raylib-go/raylib"
+	//rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 var Suits []string = []string{"hearts", "diamonds", "clubs", "spades"}
@@ -23,10 +22,9 @@ var Ranks []string = []string{"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10
 var Values = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
 
 type Card struct {
-	Suit   string
-	Rank   string
-	Sprite rl.Texture2D
-	index  int
+	Suit  string
+	Rank  string
+	index int
 }
 
 func NoCard() Card {
@@ -124,14 +122,6 @@ func Split(cards []Card) ([]Card, []Card) {
 	return cards[:int(len(cards)/2)], cards[int(len(cards)/2):]
 }
 
-// func PrintDeck(cards []Card) {
-// 	println("Deck")
-// 	for _, c := range cards {
-// 		println(c.Color(), c.Suit, c.Rank)
-// 	}
-// 	print(len(cards))
-// }
-
 func Show(cs []Card) {
 	for i, c := range cs {
 		fmt.Printf("%s%s", c.Rank, c.Suit)
@@ -140,47 +130,3 @@ func Show(cs []Card) {
 		}
 	}
 }
-
-// OLD CODE TO BE REMOVED
-
-//func (c Card) CardValue() int {
-//	return c.value
-//}
-
-//func (c Card) Card
-// func main() {
-// 	cards := FreshDeck()
-// 	printDeck(cards)
-// 	c, cards := PopFirst(cards[:])
-// 	cards = PushLast(cards[:], c)
-// 	printDeck(cards)
-// }
-
-// // FreshDeck is an unshuffled new deck of cards
-// func FreshDeck() []Card {
-// 	var cards []Card
-// 	for _, s := range Suits {
-
-// 		for i, v := range sNums {
-// 			var c Card = Card{Suit: s, Rank: v, index: Values[i]}
-// 			cards = append(cards, c)
-// 		}
-// 	}
-
-// 	return cards
-// }
-
-// // ShuffledDeck is a convienience function to grab a shuffled fresh deck
-// func ShuffledDeck() []Card {
-// 	cards := FreshDeck()
-// 	Shuffle(cards[:])
-// 	return cards
-// }
-
-// func printDeck(cards []card) {
-// 	println("Deck")
-// 	for _, c := range cards {
-// 		println(c.Color(), c.suit, c.CardValue())
-// 	}
-// 	print(len(cards))
-// }
