@@ -1,4 +1,5 @@
 // Package deck simply provides a 52 card deck shuffled with microsoft 32000 numbers (for freecell)
+// Returns a slice of cards that can be used as a deck, hand, or pile
 //
 //	it also provides an :
 //		additional 1 pass shuffle
@@ -14,6 +15,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand/v2"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -22,24 +24,22 @@ var Ranks []string = []string{"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10
 var Values = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
 
 type Card struct {
-        Suit  string
-        Rank  string
-        index int
-        IsSelected bool
-        Dest rl.Rectangle
+	Suit       string
+	Rank       string
+	index      int
+	IsSelected bool
+	Source     rl.Rectangle
+	Dest       rl.Rectangle
 }
 
 func NoCard() Card {
 	return Card{Suit: "", Rank: "", index: -1}
 }
 
-// credit to https://rosettacode.org/wiki/Deal_cards_for_FreeCell#Go
 const sSuits = "CDHS"
 const sNums = "A23456789TJQK"
-
 const rMax32 = math.MaxInt32
 
-// credit to https://rosettacode.org/wiki/Deal_cards_for_FreeCell#Go
 var seed = 1
 
 // Used specifically for the Microsoft Deck numbers (first 32000)
@@ -48,6 +48,8 @@ func rnd() int {
 	seed = (seed*214013 + 2531011) & rMax32
 	return seed >> 16
 }
+
+//**
 
 // Create a deck and shuffle
 // credit to https://rosettacode.org/wiki/Deal_cards_for_FreeCell#Go
