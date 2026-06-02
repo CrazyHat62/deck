@@ -1,6 +1,7 @@
 package deck
 
 import (
+	"fmt"
 	"math/rand"
 	"testing"
 )
@@ -8,17 +9,17 @@ import (
 func TestDeal(t *testing.T) {
 
 	got := Deal(2570)
-	want := []string{"2S", "KD", "JD", "8H", "8S", "QD", "4C", "3S",
-		"8D", "AH", "3C", "5S", "2D", "7C", "7D", "QC",
-		"QS", "6C", "6D", "5H", "KH", "KS", "7S", "9H",
-		"4D", "2H", "3D", "9C", "4S", "QH", "7H", "6S",
-		"AC", "3H", "KC", "TD", "2C", "4H", "JC", "TH",
-		"9S", "5D", "JH", "TC", "6H", "9D", "JS", "AS",
-		"5C", "8C", "TS", "AD"}
+	want := []string{"2S2", "KD13", "JD11", "8H8", "8S8", "QD12", "4C4", "3S3",
+		"8D8", "AH1", "3C3", "5S5", "2D2", "7C7", "7D7", "QC12",
+		"QS12", "6C6", "6D6", "5H5", "KH13", "KS13", "7S7", "9H9",
+		"4D4", "2H2", "3D3", "9C9", "4S4", "QH12", "7H7", "6S6",
+		"AC1", "3H3", "KC13", "TD10", "2C2", "4H4", "JC11", "TH10",
+		"9S9", "5D5", "JH11", "TC10", "6H6", "9D9", "JS11", "AS1",
+		"5C5", "8C8", "TS10", "AD1"}
 
 	for i, c := range got {
 
-		g := c.Rank + c.Suit
+		g := c.Rank + c.Suit + fmt.Sprint(c.Value)
 		if g != want[i] {
 			t.Errorf("got %q want %q", g, want[i])
 		}

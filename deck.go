@@ -26,6 +26,7 @@ var Values = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
 type Card struct {
 	Suit       string
 	Rank       string
+	Value      int
 	index      int
 	IsSelected bool
 	Source     rl.Rectangle
@@ -33,7 +34,7 @@ type Card struct {
 }
 
 func NoCard() Card {
-	return Card{Suit: "", Rank: "", index: -1}
+	return Card{Suit: "", Rank: "", Value: -1, index: -1}
 }
 
 const sSuits = "CDHS"
@@ -61,6 +62,7 @@ func Deal(s int) []Card {
 		t[i].index = c
 		t[i].Rank = fmt.Sprintf("%c", sNums[c/4])
 		t[i].Suit = fmt.Sprintf("%c", sSuits[c%4])
+		t[i].Value = Values[c/4]
 	}
 	for i := 0; i < 51; i++ {
 		j := 51 - rnd()%(52-i)
@@ -128,7 +130,7 @@ func Split(cards []Card) ([]Card, []Card) {
 
 func Show(cs []Card) {
 	for i, c := range cs {
-		fmt.Printf("%s%s", c.Rank, c.Suit)
+		fmt.Printf("%s%s%d", c.Rank, c.Suit, c.Value)
 		if (i+1)%8 == 0 || i+1 == len(cs) {
 			fmt.Println()
 		}
